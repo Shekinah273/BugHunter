@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Hunter | Debugging Arena</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <header class="topbar">
+        <a href="#" class="brand" aria-label="Bug Hunter home">
+            <span class="brand-icon">⌘</span>
+            <span>BUG<span class="accent">HUNTER</span></span>
+        </a>
+        <div class="profile-mini">
+            <span class="level-chip" id="levelLabel">Level 1</span>
+            <strong id="totalXp">0 XP</strong>
+        </div>
+    </header>
+
+    <main>
+        <section id="homeScreen" class="screen active">
+            <div class="hero">
+                <div class="eyebrow"><span class="live-dot"></span> DEBUGGING ARENA // ONLINE</div>
+                <h1>HUNT THE <span class="gradient-text">BUGS.</span><br>MASTER THE CODE.</h1>
+                <p class="hero-description">
+                    Broken Python code. Limited time. One mission.
+                    Find the bugs, sharpen your skills, and rise through the ranks.
+                </p>
+                <div class="hero-actions">
+                    <button class="primary-btn" id="startBtn">Start Hunting <span>→</span></button>
+                    <div class="hero-note"><span>⌁</span> 15 Python challenges</div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span class="stat-icon">⚡</span>
+                    <span class="stat-label">TOTAL EXPERIENCE</span>
+                    <strong id="totalXpCard">DEBUG MODE</strong>
+                    <small>Keep earning XP</small>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon">🏆</span>
+                    <span class="stat-label">BEST SCORE</span>
+                    <strong id="bestScore">0</strong>
+                    <small>Personal record</small>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon">🎯</span>
+                    <span class="stat-label">MISSIONS DONE</span>
+                    <strong id="missionsDone">0</strong>
+                    <small>Completed runs</small>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon">💎</span>
+                    <span class="stat-label">BADGES</span>
+                    <strong id="badgeCount">0</strong>
+                    <small id="badgeHeaderCount">0/6 unlocked</small>
+                </article>
+            </div>
+
+            <section class="panel difficulty-panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">CHOOSE YOUR MISSION</span>
+                        <h2>Select Difficulty</h2>
+                    </div>
+                    <span class="small-tag">PYTHON // v1.0</span>
+                </div>
+                <div class="difficulty-grid">
+                    <button class="difficulty-card selected" data-difficulty="easy">
+                        <span class="difficulty-symbol easy-symbol">01</span>
+                        <strong>Easy</strong>
+                        <span>Warm-up bugs</span>
+                        <small>25 seconds · 20 XP</small>
+                    </button>
+                    <button class="difficulty-card" data-difficulty="medium">
+                        <span class="difficulty-symbol medium-symbol">02</span>
+                        <strong>Medium</strong>
+                        <span>Think deeper</span>
+                        <small>20 seconds · 30 XP</small>
+                    </button>
+                    <button class="difficulty-card" data-difficulty="hard">
+                        <span class="difficulty-symbol hard-symbol">03</span>
+                        <strong>Hard</strong>
+                        <span>Elite debugging</span>
+                        <small>15 seconds · 40 XP</small>
+                    </button>
+                </div>
+            </section>
+
+            <section class="panel progression-panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">YOUR PROGRESSION</span>
+                        <h2>Hunter Rank</h2>
+                    </div>
+                    <span id="levelNumber" class="level-chip">LV 1</span>
+                </div>
+                <div class="rank-row">
+                    <div>
+                        <strong id="rankName">Rookie Coder</strong>
+                        <p>Every bug makes you stronger.</p>
+                    </div>
+                    <span class="rank-emblem">⌘</span>
+                </div>
+                <div class="progress-track"><div id="xpProgress" class="progress-fill"></div></div>
+                <div class="progress-labels">
+                    <span id="xpProgressText">0/100 XP this level</span>
+                    <span id="nextLevelText">100 XP to next level</span>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">ACHIEVEMENTS</span>
+                        <h2>Badge Collection</h2>
+                    </div>
+                    <span class="small-tag">6 BADGES</span>
+                </div>
+                <div id="badgePreview" class="badge-grid"></div>
+            </section>
+
+            <p class="footer-note">BUG HUNTER // TRAIN YOUR LOGIC. OWN YOUR CODE.</p>
+        </section>
+
+        <section id="gameScreen" class="screen">
+            <div class="game-topline">
+                <button id="exitBtn" class="ghost-btn">← Exit mission</button>
+                <span id="missionDifficulty" class="small-tag">EASY MISSION</span>
+                <span id="questionCounter" class="question-counter">Challenge 01 <span>/ 05</span></span>
+            </div>
+
+            <div class="mission-progress">
+                <div id="missionProgressFill"></div>
+            </div>
+
+            <div class="game-layout">
+                <section class="panel challenge-panel">
+                    <div class="challenge-meta">
+                        <span class="eyebrow">INCOMING BUG REPORT</span>
+                        <span id="challengeType" class="error-tag">SYNTAX ERROR</span>
+                    </div>
+                    <h2 id="challengeTitle">The Missing Parenthesis</h2>
+                    <p id="challengePrompt" class="challenge-prompt">Find the error in the code.</p>
+
+                    <div class="editor-window">
+                        <div class="editor-bar">
+                            <div class="window-dots"><i></i><i></i><i></i></div>
+                            <span>challenge.py</span>
+                            <span class="python-label">PYTHON</span>
+                        </div>
+                        <pre id="codeDisplay" class="code-display"></pre>
+                    </div>
+
+                    <div class="answer-heading">
+                        <h3>Identify the bug</h3>
+                        <span>SELECT ONE ANSWER</span>
+                    </div>
+                    <div id="optionsContainer" class="options-container"></div>
+
+                    <div id="hintBox" class="hint-box hidden">
+                        <span>💡</span>
+                        <div><strong>Hunter hint</strong><p id="hintText"></p></div>
+                    </div>
+
+                    <div id="feedbackBox" class="feedback-box hidden"></div>
+
+                    <div class="game-actions">
+                        <button id="hintBtn" class="secondary-btn">💡 Get a hint <small>−10 XP</small></button>
+                        <button id="submitBtn" class="primary-btn" disabled>Submit answer →</button>
+                        <button id="nextBtn" class="primary-btn hidden">Next challenge →</button>
+                    </div>
+                </section>
+
+                <aside class="side-column">
+                    <section class="panel timer-panel">
+                        <span class="eyebrow">TIME REMAINING</span>
+                        <div class="timer-ring"><strong id="timerValue">25</strong><span>SEC</span></div>
+                        <p>Think fast. Debug smart.</p>
+                    </section>
+                    <section class="panel streak-panel">
+                        <span class="eyebrow">CURRENT STREAK</span>
+                        <div class="streak-number">🔥 <strong id="streakValue">0</strong></div>
+                        <p>Consecutive correct answers</p>
+                    </section>
+                    <section class="panel tip-panel">
+                        <span class="tip-icon">⌘</span>
+                        <strong>DEBUGGER TIP</strong>
+                        <p>Read every line carefully. Tiny syntax mistakes can cause big problems.</p>
+                    </section>
+                </aside>
+            </div>
+        </section>
+
+        <section id="resultScreen" class="screen">
+            <div class="result-card panel">
+                <div id="resultIcon" class="result-icon">🏆</div>
+                <span class="eyebrow">MISSION REPORT // DEBRIEF</span>
+                <h1 id="resultTitle">Mission complete!</h1>
+                <p id="resultMessage">Your debugging report is ready.</p>
+
+                <div class="result-stats">
+                    <div><span>XP EARNED</span><strong id="runXp">0</strong></div>
+                    <div><span>CORRECT</span><strong id="correctCount">0/5</strong></div>
+                    <div><span>ACCURACY</span><strong id="accuracyValue">0%</strong></div>
+                    <div><span>BEST STREAK</span><strong id="finalStreak">0</strong></div>
+                </div>
+
+                <section class="result-badges">
+                    <h3>New achievements</h3>
+                    <div id="newBadges"></div>
+                </section>
+
+                <div class="result-actions">
+                    <button id="retryBtn" class="primary-btn">Play again ↻</button>
+                    <button id="homeBtn" class="secondary-btn">Back to home</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+</body>
+</html>
